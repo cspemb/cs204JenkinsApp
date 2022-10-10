@@ -64,9 +64,7 @@ public class CalculatorTestThorough {
                 fail();
             }
             catch (ArithmeticException e){
-                if (e.getMessage() != null) {
-                    assertTrue(failureMessage.contains(e.getMessage()));
-                }
+                assertTrue(failureMessage.contains(e.getMessage()));
             }
         }
 

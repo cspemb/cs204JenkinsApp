@@ -15,7 +15,10 @@ class Calculator {
     int multiply(int a , int b){
         return a * b;
     }
-    int divide(int a , int b){
+    int divide(int a , int b) throws ArithmeticException {
+        if (b == 0 ) {
+            throw new ArithmeticException("/ by zero");
+        }
         return a / b;
     }
 
