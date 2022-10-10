@@ -1,4 +1,6 @@
-import java.lang.reflect.InvocationTargetException;
+import java.util.Scanner;
+
+import static java.lang.System.exit;
 
 public class Main {
     private static final Calculator calc = new Calculator();
@@ -10,31 +12,53 @@ public class Main {
             "multiply a b\n" +
             "divide a b\n" +
             "binary n\n" +
-            "fib n\n\n";
+            "fib n\n" +
+            "exit\n\n";
     public static void main(String[] args) {
-        switch (args[1]) {
+
+        System.out.println("Welcome to the calculator!\n");
+        System.out.println("Enter a command: (-h for help)");
+
+        while (true) {
+            mainLoop();
+        }
+    }
+
+    private static void mainLoop() {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] currLine = scanner.nextLine().split(" ");
+        switch (currLine[0]) {
             case "add":
             case "subtract":
             case "multiply":
             case "divide":
-                final int a = Integer.parseInt(args[2]);
-                final int b = Integer.parseInt(args[3]);
-                handleArithmetic(args[1], a, b);
+                final int a = Integer.parseInt(currLine[1]);
+                final int b = Integer.parseInt(currLine[2]);
+                handleArithmetic(currLine[0], a, b);
                 break;
 
             case "binary":
-                final int bin_n = Integer.parseInt(args[2]);
+                final int bin_n = Integer.parseInt(currLine[1]);
                 handleBinary(bin_n);
                 break;
 
             case "fib":
-                final int fib_n = Integer.parseInt(args[2]);
+                final int fib_n = Integer.parseInt(currLine[1]);
                 handleFib(fib_n);
                 break;
 
+            case "-h":
+                System.out.println(USAGE);
+                System.out.println(OPS);
+                break;
+
+            case "exit":
+                exit(0);
+
             default:
-                System.err.println(USAGE);
-                System.err.println(OPS);
+                System.err.println("Invalid command. Type -h for help or exit to close the program\n");
+                break;
         }
     }
 
